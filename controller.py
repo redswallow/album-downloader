@@ -23,6 +23,9 @@ if __name__ == "__main__":
     elif opts.tool=='renren':
         import renren_image
         renren_image.renren(args[0])
+    elif opts.tool=='douban':
+        import douban_image
+        douban_image.douban(args[0])
     else:
         print Exception 
     queue.join()
