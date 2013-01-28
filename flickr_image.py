@@ -1,5 +1,6 @@
 import time,urllib2,os
 from pyquery import PyQuery
+from queue import queue
 
 def create_folder():
     #create_folder  
@@ -10,11 +11,7 @@ def create_folder():
 def download_album(links,folder):
     for link in links:
         filename='%s\\%s'%(folder,link.split('/')[-1])
-        image = urllib2.urlopen(link).read()
-        with open(filename,"wb") as f:
-            f.write(image)
-            f.close()
-        print "download "+link+" ok"
+        queue.put((link,filename))
 
 def flickr(url):
     page=PyQuery(urllib2.urlopen(url).read())
@@ -25,4 +22,3 @@ def flickr(url):
 if __name__=='__main__':
     url='http://www.flickr.com/photos/bbqpork/sets/72157625179685854/with/5087985395'
     flickr(url)
-    #queue.join()
