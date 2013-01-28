@@ -12,12 +12,9 @@ Simple Python script to download all images in an douban/renren album at once.
 
 ## Usage
 
-###douban
-`python -d controller.py ALBUM_URL` or `python --douban controller.py ALBUM_URL`
-###flickr
-`python -f controller.py ALBUM_URL` or `python --flickr controller.py ALBUM_URL`
-###renren
-`python -r controller.py ALBUM_URL` or `python --renren controller.py ALBUM_URL`
+`python controller.py -t douban/renren/flickr ALBUM_URL`
+
+`python controller.py --tool douban/renren/flickr ALBUM_URL`
 
 ## Credits
 
