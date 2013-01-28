@@ -1,7 +1,5 @@
 import time,urllib2,os
-
-#global config
-url='http://www.flickr.com/photos/bbqpork/sets/72157625179685854/with/5087985395/'
+from pyquery import PyQuery
 
 def create_folder():
     #create_folder  
@@ -9,24 +7,22 @@ def create_folder():
     os.makedirs(folder)
     return folder
 
-def download_album(photos,folder):
-    for pic in photos:
-        larg_pic=pic[:-6]+'_z.jpg'
-        filename=large_pic.split('/')[-1]
-        image = urllib2.urlopen(large_pic).read()
-        with open(folder+'\\'+filename,"wb" ) as f:
+def download_album(links,folder):
+    for link in links:
+        filename='%s\\%s'%(folder,link.split('/')[-1])
+        image = urllib2.urlopen(link).read()
+        with open(filename,"wb") as f:
             f.write(image)
             f.close()
-        print "download "+large_pic+" ok"
+        print "download "+link+" ok"
 
-start=time.clock()
+def flickr(url):
+    page=PyQuery(urllib2.urlopen(url).read())
+    #get img-src
+    links=[link.values()[0].replace('_s','_z') for link in page('.photo-display-item img')]
+    download_album(links,create_folder())
 
-response=urllib2.urlopen(url)
-str=response.read()
-from flickr_geturl import *
-my=Get:wUrl()
-my.feed(str)
-download_album(my.links,create_folder())
- 
-elapsed=time.clock()-start
-print "Time used:",elapsed
+if __name__=='__main__':
+    url='http://www.flickr.com/photos/bbqpork/sets/72157625179685854/with/5087985395'
+    flickr(url)
+    #queue.join()
