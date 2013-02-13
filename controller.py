@@ -7,7 +7,7 @@ _options=['flickr','renren','douban','lastfm']
 
 def init():
     #init threading
-    for i in xrange(5):
+    for i in xrange(25):
         Worker(queue).start()
 
 if __name__ == "__main__":
