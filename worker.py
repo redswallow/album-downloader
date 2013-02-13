@@ -1,4 +1,5 @@
 import threading,urllib2
+import logger
 lock = threading.Lock()  
 
 class Worker(threading.Thread):
@@ -11,8 +12,12 @@ class Worker(threading.Thread):
         while True:
             url,filename=self.queue.get()
             #running task
-            self.save_image(url,filename)
-            self.queue.task_done()
+            try:
+                self.save_image(url,filename)
+                self.queue.task_done()
+            except:
+                logger.log('log_error.txt',' '.join(('ERROR:',url,filename)))
+                self.queue.put((url,filename))
 
     def save_image(self,url,filename):
         image = urllib2.urlopen(url).read()
