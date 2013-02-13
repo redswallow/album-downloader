@@ -17,7 +17,6 @@ if __name__ == "__main__":
     parser.add_option("-t", "--tool",dest="tool")
     #get args
     opts, args =parser.parse_args()
-    print opts,args
     if opts.tool=='flickr':
         import flickr_image
         flickr_image.flickr(args[0])

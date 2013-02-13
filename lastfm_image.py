@@ -8,11 +8,10 @@ def create_folder():
     os.makedirs(folder)
     return folder
 
-def download_album(photos,folder):
-    for pic in photos:
-        url=re.findall('large:\'(.*?)\'',pic)[0]
-        filename="".join((folder,'\\',url.split('/')[-1]))
-        queue.put((url,filename))
+def download_album(links,folder):
+    for link in links:
+        filename='%s\\%s'%(folder,link.split('/')[-1])
+        queue.put((link,filename))
 
 def lastfm(url):
     page=PyQuery(urllib2.urlopen(url).read())
@@ -21,8 +20,7 @@ def lastfm(url):
     folder=create_folder()
     for i in xrange(1,page_num+1):
         page=PyQuery(urllib2.urlopen('%s?page=%d'%(url,i)).read())
-        links=[link.values()[0].replace('126s','500') for link in page('.pic')]
-        print links
+        links=[link.values()[-1].replace('/126s/','/500/') for link in page('.pic img')]
         download_album(links,folder)
 
 if __name__=='__main__':
