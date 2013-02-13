@@ -3,7 +3,7 @@ from optparse import OptionParser
 from worker import Worker,lock
 from queue import queue
 
-_options=['flickr','renren','douban']
+_options=['flickr','renren','douban','lastfm']
 
 def init():
     #init threading
@@ -17,6 +17,7 @@ if __name__ == "__main__":
     parser.add_option("-t", "--tool",dest="tool")
     #get args
     opts, args =parser.parse_args()
+    print opts,args
     if opts.tool=='flickr':
         import flickr_image
         flickr_image.flickr(args[0])
@@ -26,6 +27,9 @@ if __name__ == "__main__":
     elif opts.tool=='douban':
         import douban_image
         douban_image.douban(args[0])
+    elif opts.tool=='lastfm':
+        import lastfm_image
+        lastfm_image.lastfm(args[0])
     else:
         print Exception 
     queue.join()
