@@ -36,6 +36,3 @@ nosetests.xml
 .pydevproject
 
 #album-downloader
-config.ini
-config.ini.temp
-*/
