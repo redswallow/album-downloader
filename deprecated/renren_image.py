@@ -26,5 +26,5 @@ def renren(url):
     download_album(photos,create_folder())
 
 if __name__=='__main__':
-    url='http://photo.renren.com/photo/449261954/album-852067402'
+    url='http://photo.renren.com/photo/245983299/album-462669527'
     renren(url)
