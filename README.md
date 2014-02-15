@@ -1,20 +1,20 @@
 Album-Downloader
 ================
-Simple Python script to download all images in an douban/renren album at once.
+Some simple image spider examples using scrapy.
 
 ## Requirements
 
 使用包管理器pip / easy_install
 
-解析网页用到了pyquery，pyquery依赖于lxml，win下请先到[这里](http://www.lfd.uci.edu/~gohlke/pythonlibs/#lxml)下载lxml二进制安装包。
+依赖于scrapy, PIL:
 
-`pip install pyquery`
+`pip install scrapy`
+
+`pip install PIL`
 
 ## Usage
 
-`python controller.py -t douban/renren/flickr/lastfm ALBUM_URL`
-
-`python controller.py --tool douban/renren/flickr/lastfm ALBUM_URL`
+`scrapy crawl douban_image_spider`
 
 ## Credits
 
