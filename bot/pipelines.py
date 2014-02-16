@@ -5,6 +5,7 @@
 
 from scrapy.exceptions import DropItem
 from scrapy.contrib.pipeline.images import ImagesPipeline
+from scrapy.http import Request
 from scrapy.conf import settings
 import os
 import urllib2
@@ -20,6 +21,11 @@ class FilterWordsPipeline(object):
                 return item
 
 class MyImagesPipeline(ImagesPipeline):
-    def image_key(self, url):
+    def get_media_requests(self, item, info):
+        return [Request(x, meta=dict(album=item['album'])) for x in item.get(self.IMAGES_URLS_FIELD, [])]
+
+    def file_path(self, request, response=None, info=None):
+        url = request.url
+        album = request.meta.get('album')
         image_guid = url.split('/')[-1]
-        return 'full/%s' % (image_guid)
+        return '%s/%s.jpg' % (album, image_guid)

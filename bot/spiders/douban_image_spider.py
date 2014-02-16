@@ -19,12 +19,14 @@ class DoubanImageSpider(CrawlSpider):
 
     def parse_image(self, response):
         sel = Selector(response)
+        album = response.url.split('/')[-2]
         photolst = sel.xpath('//div[@class="photolst clearfix"]/div')
         items = []
         for photo in photolst:
             try:
                 item = ImageItem()
                 item['image_urls'] = [url.replace('thumb','photo') for url in photolst.xpath('a/img/@src').extract()]
+                item['album'] = album
                 items.append(item)
             except:
                 pass

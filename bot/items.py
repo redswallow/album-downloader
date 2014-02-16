@@ -8,3 +8,4 @@ from scrapy.item import Item, Field
 class ImageItem(Item):
     image_urls = Field()
     images = Field()
+    album = Field()
