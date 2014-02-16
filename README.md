@@ -14,7 +14,7 @@ Some simple image spider examples using scrapy.
 
 ## Usage
 
-`scrapy crawl douban_image_spider`
+`scrapy crawl douban_image_spider -a username=ANY_USERNAME`
 
 ## Credits
 
