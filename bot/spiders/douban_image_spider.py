@@ -11,11 +11,12 @@ class DoubanImageSpider(CrawlSpider):
             Rule(SgmlLinkExtractor(allow = 'photos/album/\d+/[\?start=\d+]?'), callback = 'parse_image', follow = True)
     ]
 
-    def __init__(self, username = 'redswallow', *args, **kwargs):
+    def __init__(self, username = None, album = None, *args, **kwargs):
         super(DoubanImageSpider, self).__init__(*args, **kwargs)
-        self.start_urls = [
-                "http://www.douban.com/people/%s/photos" % username
-        ]
+        if username is not None:
+            self.start_urls.append("http://www.douban.com/people/%s/photos" % username)
+        if album is not None: 
+            self.start_urls.append("http://www.douban.com/photos/album/%s/" % album)
 
     def parse_image(self, response):
         sel = Selector(response)

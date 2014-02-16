@@ -13,8 +13,21 @@ Some simple image spider examples using scrapy.
 `pip install PIL`
 
 ## Usage
+Crawl all douban albums of a user:
 
-`scrapy crawl douban_image_spider -a username=ANY_USERNAME`
+e.g. http://www.douban.com/people/redswallow/photos
+
+USERNAME = redswallow
+
+`scrapy crawl douban_image_spider -a username=USERNAME`
+
+Crawl a specific douban album
+
+e.g. http://www.douban.com/photos/album/99908571/
+
+ALBUM_ID = 99908571
+
+`scrapy crawl douban_image_spider -a album=ALBUM_ID`
 
 ## Credits
 
