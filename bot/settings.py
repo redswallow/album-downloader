@@ -6,7 +6,8 @@ NEWSPIDER_MODULE = 'bot.spiders'
 DEFAULT_ITEM_CLASS = 'bot.items.ImageItem'
 
 ITEM_PIPELINES = [
-    'scrapy.contrib.pipeline.images.ImagesPipeline'
+    #'scrapy.contrib.pipeline.images.ImagesPipeline'
+    'bot.pipelines.MyImagesPipeline'
 ]
 IMAGES_STORE = 'images'
 IMAGE_EXPIRES = 180 # 180 days

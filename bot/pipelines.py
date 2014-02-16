@@ -4,6 +4,10 @@
 # See: http://doc.scrapy.org/en/latest/topics/item-pipeline.html
 
 from scrapy.exceptions import DropItem
+from scrapy.contrib.pipeline.images import ImagesPipeline
+from scrapy.conf import settings
+import os
+import urllib2
 
 class FilterWordsPipeline(object):
     words_to_filter = ['politics', 'free']
@@ -14,3 +18,8 @@ class FilterWordsPipeline(object):
                 raise DropItem("Contains forbidden word: %s" % word)
             else:
                 return item
+
+class MyImagesPipeline(ImagesPipeline):
+    def image_key(self, url):
+        image_guid = url.split('/')[-1]
+        return 'full/%s' % (image_guid)
